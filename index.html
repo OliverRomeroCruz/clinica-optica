@@ -10,16 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Three.js Import Map (Crucial for ES Module bare specifier resolution) -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-      }
-    }
-  </script>
-  
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -55,16 +45,23 @@
         Clínica Óptica
       </a>
 
-      <!-- Menú en español con la nueva opción VISUALIZAR GAFAS -->
-      <nav class="hidden md:flex items-center space-x-7 lg:space-x-9 text-[11px] font-medium tracking-[0.2em] text-[#9A9A9A]">
+      <!-- Menú en español -->
+      <nav class="hidden md:flex items-center space-x-10 text-[11px] font-medium tracking-[0.2em] text-[#9A9A9A]">
         <a href="#servicios" class="hover:text-[#222222] transition-colors">SERVICIOS</a>
-        <a href="#visualizador" class="hover:text-[#222222] transition-colors text-[#111111] font-semibold border-b border-[#111111] pb-0.5">VISUALIZAR GAFAS</a>
         <a href="#testimonios" class="hover:text-[#222222] transition-colors">TESTIMONIOS</a>
         <a href="#contacto" class="hover:text-[#222222] transition-colors">CONTACTO</a>
         <a href="#ubicacion" class="hover:text-[#222222] transition-colors">UBICACIÓN</a>
       </nav>
 
-      <!-- Botón móvil -->
+      <!-- Botón de Acceso / Perfil de Usuario conectado a la Base de Datos Local -->
+      <div class="hidden md:flex items-center" id="nav-auth-container">
+        <button class="open-auth-btn text-[11px] font-semibold tracking-[0.2em] uppercase text-[#262626] hover:opacity-70 transition-opacity flex items-center gap-2 border border-[#262626] px-4 py-2">
+          <span>ACCEDER</span>
+          <span class="text-xs">→</span>
+        </button>
+      </div>
+
+      <!-- Botón menú móvil -->
       <button id="mobile-menu-btn" class="md:hidden p-2 text-[#222222]" aria-label="Menú">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
@@ -85,14 +82,15 @@
       </div>
       <nav class="flex flex-col space-y-6 text-xs font-semibold tracking-[0.2em] text-[#222222]">
         <a href="#servicios" class="mobile-link">SERVICIOS</a>
-        <a href="#visualizador" class="mobile-link font-bold text-black">VISUALIZAR GAFAS 3D</a>
         <a href="#testimonios" class="mobile-link">TESTIMONIOS</a>
         <a href="#contacto" class="mobile-link">CONTACTO</a>
         <a href="#ubicacion" class="mobile-link">UBICACIÓN</a>
       </nav>
     </div>
-    <div class="pt-6 border-t border-[#ECECEC]">
-      <p class="text-[11px] text-[#797979] uppercase tracking-wider">CUIDADO VISUAL & ATELIER</p>
+    <div class="pt-6 border-t border-[#ECECEC]" id="mobile-auth-container">
+      <button class="open-auth-btn w-full btn-apex-exact py-3 text-center justify-center">
+        ACCEDER / REGISTRARSE
+      </button>
     </div>
   </div>
 
@@ -127,16 +125,16 @@
               </p>
             </div>
 
-            <!-- Botón negro con flecha idéntico a la referencia -->
+            <!-- Botones de acción -->
             <div class="mt-10 flex flex-wrap items-center gap-4">
               <a href="#servicios" class="btn-apex-exact">
                 <span>EXPLORAR SERVICIOS</span>
                 <span class="text-sm font-light arrow-icon">→</span>
               </a>
-              <a href="#visualizador" class="inline-flex items-center gap-2 border border-[#2A2A28] text-[#2A2A28] text-[10.5px] font-semibold tracking-[0.2em] uppercase px-5 py-3.5 hover:bg-[#2A2A28] hover:text-white transition-colors">
-                <span>EXPERIENCIA 3D</span>
-                <span class="text-xs">⟲</span>
-              </a>
+              <button class="open-auth-btn inline-flex items-center gap-2 border border-[#2A2A28] text-[#2A2A28] text-[10.5px] font-semibold tracking-[0.2em] uppercase px-5 py-3.5 hover:bg-[#2A2A28] hover:text-white transition-colors">
+                <span>ÁREA DE USUARIO</span>
+                <span class="text-xs">→</span>
+              </button>
             </div>
           </div>
 
@@ -206,7 +204,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>GRADUADAS & SOL</span>
-              <a href="#visualizador" class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Probar en 3D →</a>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Ver Catálogo →</span>
             </div>
           </div>
 
@@ -275,95 +273,103 @@
       </div>
     </section>
 
-    <!-- ==================== SECCIÓN: VISUALIZADOR 3D INTERACTIVO ==================== -->
-    <section id="visualizador" class="w-full bg-[#0E0E10] text-white border-b border-neutral-800 relative overflow-hidden">
-      <div class="max-w-[1360px] mx-auto px-6 sm:px-10">
-        
-        <!-- Cabecera de la sección en retícula de 3 columnas (Modo Estudio Oscuro) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 border-l border-r border-neutral-800 border-b border-neutral-800">
-          <div class="p-8 sm:p-10 lg:border-r border-neutral-800">
-            <span class="text-[10px] tracking-[0.22em] font-medium text-neutral-400 uppercase block mb-3">02 / EXPERIENCIA INMERSIVA</span>
-            <h2 class="text-2xl sm:text-3xl font-[800] tracking-[-0.03em] text-white">Visualizador 3D.</h2>
-          </div>
-          <div class="hidden lg:block lg:border-r border-neutral-800 p-10 flex items-center">
-            <p class="text-[13.5px] text-neutral-400 leading-[1.65]">
-              Explora en tiempo real la geometría de nuestra montura insigne. Rota libremente 360°, haz zoom y personaliza los acabados de titanio y cristales.
-            </p>
-          </div>
-          <div class="p-8 sm:p-10 flex items-center justify-between lg:justify-end gap-4">
-            <span class="text-[10px] font-mono tracking-widest text-neutral-500 uppercase">STUDIO PBR THREE.JS</span>
-            <button id="btn-reset-view" class="px-4 py-2 border border-neutral-700 hover:border-white text-xs font-mono text-neutral-300 hover:text-white transition-all uppercase tracking-wider flex items-center gap-2">
-              <span>Restablecer Vista</span>
-              <span class="text-sm">⟲</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Canvas 3D Interactivo con Overlays de Estudio -->
-        <div class="border-l border-r border-neutral-800 relative">
-          
-          <!-- Contenedor del Canvas de Three.js -->
-          <div id="glasses-canvas-container" class="w-full h-[580px] sm:h-[640px] cursor-grab active:cursor-grabbing relative">
-            
-            <!-- Badge superior izquierdo: Ficha Técnica Rápida -->
-            <div class="absolute top-6 left-6 z-20 pointer-events-none hidden sm:block">
-              <span class="text-[10px] font-mono tracking-[0.25em] text-neutral-400 uppercase block mb-1">MODELO 3D REAL GLB</span>
-              <h4 id="viewer-model-title" class="text-lg font-[700] text-white">Montura Sol Classic</h4>
-              <p class="text-[11px] font-mono text-neutral-400 mt-0.5">Calibre 52◽19 145 · Acetato & Cristales UV400</p>
-            </div>
-
-            <!-- Indicador Central Flotante: ARRASTRA PARA EXPLORAR -->
-            <div id="drag-hint-badge" class="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-center gap-3 bg-black/60 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-full transition-opacity duration-500 shadow-2xl">
-              <svg class="w-4 h-4 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-              </svg>
-              <span class="text-[10.5px] font-mono tracking-[0.2em] text-neutral-200 uppercase font-medium">
-                Arrastra para explorar 360° · Rueda para zoom
-              </span>
-            </div>
-
-            <!-- Barra Inferior Flotante de Configuración de Materiales -->
-            <div class="absolute bottom-6 left-4 right-4 sm:left-6 sm:right-6 z-20 flex flex-col md:flex-row items-center justify-between gap-4 bg-neutral-900/80 backdrop-blur-md p-4 sm:p-5 border border-neutral-800">
-              
-              <!-- Selector de Acabado de la Montura -->
-              <div class="flex items-center gap-4 flex-wrap">
-                <span class="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">ACABADO:</span>
-                <div class="flex items-center gap-2.5">
-                  <button class="frame-color-btn w-6 h-6 rounded-full bg-[#1c1c1e] border border-neutral-600 transition-all ring-2 ring-white scale-110" data-frame="black" title="Titanio Negro"></button>
-                  <button class="frame-color-btn w-6 h-6 rounded-full bg-[#d4af37] border border-neutral-600 transition-all hover:scale-110" data-frame="gold" title="Oro Champagne"></button>
-                  <button class="frame-color-btn w-6 h-6 rounded-full bg-[#e5e7eb] border border-neutral-600 transition-all hover:scale-110" data-frame="silver" title="Plata Quirúrgica"></button>
-                  <button class="frame-color-btn w-6 h-6 rounded-full bg-[#964b00] border border-neutral-600 transition-all hover:scale-110" data-frame="amber" title="Bio-Acetato Ámbar"></button>
-                </div>
-                <span id="current-frame-label" class="text-xs text-neutral-300 font-medium ml-1">Titanio Negro Mate</span>
-              </div>
-
-              <!-- Selector de Tonalidad de Lentes -->
-              <div class="flex items-center gap-4 flex-wrap">
-                <span class="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">CRISTAL:</span>
-                <div class="flex items-center gap-2">
-                  <button class="lens-color-btn px-3 py-1.5 border border-white text-white text-[10px] font-mono uppercase tracking-wider transition-all" data-lens="clear">
-                    Transparente HD
-                  </button>
-                  <button class="lens-color-btn px-3 py-1.5 border border-neutral-700 text-neutral-400 hover:text-white text-[10px] font-mono uppercase tracking-wider transition-all" data-lens="green">
-                    Verde Mineral
-                  </button>
-                  <button class="lens-color-btn px-3 py-1.5 border border-neutral-700 text-neutral-400 hover:text-white text-[10px] font-mono uppercase tracking-wider transition-all" data-lens="blue">
-                    Degradé Azul
-                  </button>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
   </main>
 
+  <!-- ==================== MODAL DE AUTENTICACIÓN (LOGIN / REGISTRO CON BD LOCAL SQLITE) ==================== -->
+  <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity">
+    <div class="bg-white max-w-md w-full p-8 sm:p-10 border border-[#ECECEC] shadow-2xl relative">
+      
+      <!-- Botón de Cerrar Modal -->
+      <button id="close-auth-modal" class="absolute top-6 right-6 text-neutral-400 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Encabezado del Modal con Pestañas -->
+      <div class="mb-6">
+        <span class="text-[10px] font-mono tracking-[0.25em] text-[#777777] uppercase block mb-2">BASE DE DATOS LOCAL</span>
+        <div class="flex items-center space-x-6 border-b border-[#ECECEC] pb-2 text-xs font-semibold tracking-wider">
+          <button id="tab-btn-login" class="pb-2 border-b-2 border-[#262626] text-[#262626] font-bold uppercase transition-colors">
+            Iniciar Sesión
+          </button>
+          <button id="tab-btn-register" class="pb-2 text-[#9A9A9A] uppercase transition-colors hover:text-[#262626]">
+            Registrarse
+          </button>
+        </div>
+      </div>
+
+      <!-- Caja de Notificaciones / Errores -->
+      <div id="auth-message-box" class="hidden mb-6 p-3 text-xs border rounded-none"></div>
+
+      <!-- FORMULARIO 1: INICIAR SESIÓN -->
+      <form id="form-login" class="space-y-5">
+        <div>
+          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1.5">Correo Electrónico</label>
+          <input type="email" id="login-correo" required placeholder="tu@correo.com" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+        </div>
+        <div>
+          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1.5">Contraseña</label>
+          <input type="password" id="login-contrasena" required placeholder="••••••••" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+        </div>
+        <button type="submit" class="btn-apex-exact w-full py-3.5 text-center justify-center">
+          <span>ENTRAR AL SISTEMA</span>
+          <span class="text-sm font-light arrow-icon">→</span>
+        </button>
+      </form>
+
+      <!-- FORMULARIO 2: REGISTRO (CON ROL, NOMBRE, CORREO Y CONTRASEÑA) -->
+      <form id="form-register" class="space-y-4 hidden">
+        <div>
+          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Nombre Completo</label>
+          <input type="text" id="reg-nombre" required placeholder="Ej. Ana Martínez" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+        </div>
+        <div>
+          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Correo Electrónico</label>
+          <input type="email" id="reg-correo" required placeholder="ana@ejemplo.com" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+        </div>
+        <div>
+          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Contraseña</label>
+          <input type="password" id="reg-contrasena" required minlength="6" placeholder="Mínimo 6 caracteres" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+        </div>
+        <div>
+          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Rol en la Base de Datos</label>
+          <select id="reg-rol" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+            <option value="cliente">Cliente / Paciente</option>
+            <option value="optometrista">Optometrista Especialista</option>
+            <option value="administrador">Administrador de Clínica</option>
+            <option value="recepcion">Recepción / Gestión</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-apex-exact w-full py-3.5 text-center justify-center mt-2">
+          <span>REGISTRAR EN BASE DE DATOS</span>
+          <span class="text-sm font-light arrow-icon">→</span>
+        </button>
+      </form>
+
+      <!-- VISTA 3: PERFIL DE USUARIO LOGUEADO -->
+      <div id="user-profile-view" class="hidden space-y-6 text-center py-2">
+        <div class="w-14 h-14 bg-[#262626] text-white rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+          👤
+        </div>
+        <div>
+          <span id="profile-id" class="text-[10px] font-mono tracking-widest text-[#9A9A9A] block mb-1"></span>
+          <h3 id="profile-name" class="text-2xl font-[700] text-[#262626]"></h3>
+          <p id="profile-email" class="text-xs text-[#737373] mt-1"></p>
+        </div>
+        <div class="p-3 bg-[#FAFBFB] border border-[#ECECEC] inline-block">
+          <span class="text-[10px] font-mono text-[#9A9A9A] uppercase tracking-wider block">ROL ASIGNADO:</span>
+          <span id="profile-role" class="text-xs font-bold text-[#262626] tracking-widest uppercase"></span>
+        </div>
+        <div>
+          <button id="btn-logout" class="w-full py-3 border border-red-300 text-red-600 hover:bg-red-50 text-xs font-semibold uppercase tracking-wider transition-colors">
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts del proyecto -->
   <script>
     // Control del menú móvil
     const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -382,7 +388,7 @@
     });
   </script>
 
-  <!-- Script Modular 3D Three.js -->
-  <script type="module" src="viewer3d.js"></script>
+  <!-- Script de Autenticación y Base de Datos Local -->
+  <script src="auth.js"></script>
 </body>
 </html>
