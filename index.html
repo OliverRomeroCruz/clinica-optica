@@ -45,12 +45,9 @@
         Clínica Óptica
       </a>
 
-      <!-- Menú en español según la retícula de referencia -->
+      <!-- Menú en español -->
       <nav class="hidden md:flex items-center space-x-10 text-[11px] font-medium tracking-[0.2em] text-[#9A9A9A]">
         <a href="#servicios" class="hover:text-[#222222] transition-colors">SERVICIOS</a>
-        <a href="#testimonios" class="hover:text-[#222222] transition-colors">TESTIMONIOS</a>
-        <a href="#contacto" class="hover:text-[#222222] transition-colors">CONTACTO</a>
-        <a href="#ubicacion" class="hover:text-[#222222] transition-colors">UBICACIÓN</a>
       </nav>
 
       <!-- Botón móvil -->
@@ -74,9 +71,6 @@
       </div>
       <nav class="flex flex-col space-y-6 text-xs font-semibold tracking-[0.2em] text-[#222222]">
         <a href="#servicios" class="mobile-link">SERVICIOS</a>
-        <a href="#testimonios" class="mobile-link">TESTIMONIOS</a>
-        <a href="#contacto" class="mobile-link">CONTACTO</a>
-        <a href="#ubicacion" class="mobile-link">UBICACIÓN</a>
       </nav>
     </div>
     <div class="pt-6 border-t border-[#ECECEC]">
@@ -85,7 +79,7 @@
   </div>
 
   <main>
-    <!-- ==================== SECCIÓN HERO (CALCO EXACTO A LA FOTO DE REFERENCIA) ==================== -->
+    <!-- ==================== SECCIÓN HERO (CALCO EXACTO A LA REFERENCIA) ==================== -->
     <section class="w-full bg-white border-b border-[#ECECEC]">
       <div class="max-w-[1360px] mx-auto px-6 sm:px-10">
         
@@ -140,6 +134,125 @@
 
       </div>
     </section>
+
+    <!-- ==================== SECCIÓN: SERVICIOS (AL HACER SCROLL) ==================== -->
+    <section id="servicios" class="w-full bg-white border-b border-[#ECECEC]">
+      <div class="max-w-[1360px] mx-auto px-6 sm:px-10">
+        
+        <!-- Cabecera de la sección integrada en la retícula de 3 columnas -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 border-l border-r border-[#ECECEC] border-b border-[#ECECEC]">
+          <div class="p-8 sm:p-10 lg:border-r border-[#ECECEC]">
+            <span class="text-[10px] tracking-[0.22em] font-medium text-[#777777] uppercase block mb-3">01 / CUIDADO VISUAL</span>
+            <h2 class="text-2xl sm:text-3xl font-[800] tracking-[-0.03em] text-[#262626]">Nuestros Servicios.</h2>
+          </div>
+          <div class="hidden lg:block lg:border-r border-[#ECECEC] p-10 flex items-center">
+            <p class="text-[13.5px] text-[#737373] leading-[1.65]">
+              Atención personalizada con tecnología óptica de alta precisión. Desde la graduación clínica hasta el diseño, montaje y ajuste de tus monturas.
+            </p>
+          </div>
+          <div class="p-8 sm:p-10 flex items-center lg:justify-end">
+            <span class="text-[11px] font-mono tracking-wider text-[#9A9A9A]">GABINETE & TALLER PROPIO</span>
+          </div>
+        </div>
+
+        <!-- Rejilla de Servicios estructurada en 3 columnas arquitectónicas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-l border-r border-[#ECECEC]">
+          
+          <!-- 1. Revisar la vista -->
+          <div class="p-8 sm:p-10 border-b lg:border-r border-[#ECECEC] flex flex-col justify-between hover:bg-[#FAFAFA] transition-colors group">
+            <div>
+              <span class="text-[11px] font-mono text-[#9A9A9A] block mb-6">01.01 — OPTOMETRÍA</span>
+              <h3 class="text-xl font-[700] text-[#262626] mb-3 group-hover:text-black">Revisar la Vista</h3>
+              <p class="text-[13px] text-[#737373] leading-[1.65] mb-8">
+                Examen visual exhaustivo: graduación digital de la agudeza visual, medición de la tensión ocular y evaluación binocular para evitar fatiga ante pantallas.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
+              <span>TIEMPO: 30-40 MIN</span>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Pedir Cita →</span>
+            </div>
+          </div>
+
+          <!-- 2. Comprar gafas -->
+          <div class="p-8 sm:p-10 border-b lg:border-r border-[#ECECEC] flex flex-col justify-between hover:bg-[#FAFAFA] transition-colors group">
+            <div>
+              <span class="text-[11px] font-mono text-[#9A9A9A] block mb-6">01.02 — MONTURAS</span>
+              <h3 class="text-xl font-[700] text-[#262626] mb-3 group-hover:text-black">Comprar Gafas</h3>
+              <p class="text-[13px] text-[#737373] leading-[1.65] mb-8">
+                Catálogo selecto de monturas graduadas y de sol. Te asesoramos según tu fisonomía facial y el grosor de tus cristales para un resultado estético perfecto.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
+              <span>GRADUADAS & SOL</span>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Ver Catálogo →</span>
+            </div>
+          </div>
+
+          <!-- 3. Comprar lentillas -->
+          <div class="p-8 sm:p-10 border-b border-[#ECECEC] flex flex-col justify-between hover:bg-[#FAFAFA] transition-colors group">
+            <div>
+              <span class="text-[11px] font-mono text-[#9A9A9A] block mb-6">01.03 — CONTACTOLOGÍA</span>
+              <h3 class="text-xl font-[700] text-[#262626] mb-3 group-hover:text-black">Comprar Lentillas</h3>
+              <p class="text-[13px] text-[#737373] leading-[1.65] mb-8">
+                Adaptación personalizada de lentes de contacto diarias, mensuales, tóricas (astigmatismo) y progresivas. Prueba de adaptación y pack de inicio.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
+              <span>TODOS LOS FORMATOS</span>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Consultar →</span>
+            </div>
+          </div>
+
+          <!-- 4. Cambiar cristales -->
+          <div class="p-8 sm:p-10 border-b md:border-b-0 lg:border-r border-[#ECECEC] flex flex-col justify-between hover:bg-[#FAFAFA] transition-colors group">
+            <div>
+              <span class="text-[11px] font-mono text-[#9A9A9A] block mb-6">01.04 — RENOVACIÓN</span>
+              <h3 class="text-xl font-[700] text-[#262626] mb-3 group-hover:text-black">Cambiar Cristales</h3>
+              <p class="text-[13px] text-[#737373] leading-[1.65] mb-8">
+                Actualiza tu graduación conservando tu montura actual. Montamos lentes antirreflejantes, reducidas, fotocromáticas o con filtro de luz azul.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
+              <span>MONOFOCAL / PROGRESIVO</span>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Presupuesto →</span>
+            </div>
+          </div>
+
+          <!-- 5. Salud ocular y fondo de ojo -->
+          <div class="p-8 sm:p-10 border-b md:border-b-0 lg:border-r border-[#ECECEC] flex flex-col justify-between hover:bg-[#FAFAFA] transition-colors group">
+            <div>
+              <span class="text-[11px] font-mono text-[#9A9A9A] block mb-6">01.05 — PREVENCIÓN</span>
+              <h3 class="text-xl font-[700] text-[#262626] mb-3 group-hover:text-black">Salud Ocular & Fondo de Ojo</h3>
+              <p class="text-[13px] text-[#737373] leading-[1.65] mb-8">
+                Retinografía digital de alta definición sin necesidad de gotas dilatadoras. Detección precoz de alteraciones maculares y control del nervio óptico.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
+              <span>TECNOLOGÍA NO MIDRIÁTICA</span>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Más info →</span>
+            </div>
+          </div>
+
+          <!-- 6. Ajuste y taller de gafas -->
+          <div class="p-8 sm:p-10 flex flex-col justify-between hover:bg-[#FAFAFA] transition-colors group">
+            <div>
+              <span class="text-[11px] font-mono text-[#9A9A9A] block mb-6">01.06 — TALLER</span>
+              <h3 class="text-xl font-[700] text-[#262626] mb-3 group-hover:text-black">Ajuste & Taller Propio</h3>
+              <p class="text-[13px] text-[#737373] leading-[1.65] mb-8">
+                Calibrado y enderezado anatómico de patillas, cambio de plaquetas nasales, tornillos de seguridad y limpieza profunda por ultrasonidos.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
+              <span>SERVICIO EN EL DÍA</span>
+              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Consultar →</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <script>
