@@ -132,7 +132,7 @@
                 <span class="text-sm font-light arrow-icon">→</span>
               </a>
               <button class="open-auth-btn inline-flex items-center gap-2 border border-[#2A2A28] text-[#2A2A28] text-[10.5px] font-semibold tracking-[0.2em] uppercase px-5 py-3.5 hover:bg-[#2A2A28] hover:text-white transition-colors">
-                <span>ÁREA DE USUARIO</span>
+                <span>ÁREA PRIVADA</span>
                 <span class="text-xs">→</span>
               </button>
             </div>
@@ -189,7 +189,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>TIEMPO: 30-40 MIN</span>
-              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Pedir Cita →</span>
+              <button class="open-auth-btn font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Pedir Cita →</button>
             </div>
           </div>
 
@@ -204,7 +204,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>GRADUADAS & SOL</span>
-              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Ver Catálogo →</span>
+              <button class="open-auth-btn font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Consultar Pedido →</button>
             </div>
           </div>
 
@@ -219,7 +219,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>TODOS LOS FORMATOS</span>
-              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Consultar →</span>
+              <button class="open-auth-btn font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Mis Lentillas →</button>
             </div>
           </div>
 
@@ -234,7 +234,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>MONOFOCAL / PROGRESIVO</span>
-              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Presupuesto →</span>
+              <button class="open-auth-btn font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Presupuesto →</button>
             </div>
           </div>
 
@@ -249,7 +249,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>TECNOLOGÍA NO MIDRIÁTICA</span>
-              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Más info →</span>
+              <button class="open-auth-btn font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Agendar Cita →</button>
             </div>
           </div>
 
@@ -264,7 +264,7 @@
             </div>
             <div class="pt-6 border-t border-[#ECECEC] flex items-center justify-between text-[11px] font-mono text-[#777777]">
               <span>SERVICIO EN EL DÍA</span>
-              <span class="font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Consultar →</span>
+              <button class="open-auth-btn font-bold text-[#262626] group-hover:translate-x-1 transition-transform inline-block">Consultar →</button>
             </div>
           </div>
 
@@ -275,30 +275,30 @@
 
   </main>
 
-  <!-- ==================== MODAL DE AUTENTICACIÓN (LOGIN / REGISTRO CON BD LOCAL SQLITE) ==================== -->
-  <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity">
-    <div class="bg-white max-w-md w-full p-8 sm:p-10 border border-[#ECECEC] shadow-2xl relative">
+  <!-- ==================== MODAL DE AUTENTICACIÓN & PANELES CLIENTE / ADMIN ==================== -->
+  <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity overflow-y-auto">
+    <div class="bg-white max-w-2xl w-full p-6 sm:p-10 border border-[#ECECEC] shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto">
       
       <!-- Botón de Cerrar Modal -->
       <button id="close-auth-modal" class="absolute top-6 right-6 text-neutral-400 hover:text-black">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
-      <!-- Encabezado del Modal con Pestañas -->
-      <div class="mb-6">
-        <span class="text-[10px] font-mono tracking-[0.25em] text-[#777777] uppercase block mb-2">BASE DE DATOS LOCAL</span>
+      <!-- Pestañas de Acceso (Solo visibles cuando NO hay sesión iniciada) -->
+      <div id="auth-tabs-container" class="mb-6">
+        <span class="text-[10px] font-mono tracking-[0.25em] text-[#777777] uppercase block mb-2">BASE DE DATOS LOCAL CLÍNICA</span>
         <div class="flex items-center space-x-6 border-b border-[#ECECEC] pb-2 text-xs font-semibold tracking-wider">
           <button id="tab-btn-login" class="pb-2 border-b-2 border-[#262626] text-[#262626] font-bold uppercase transition-colors">
             Iniciar Sesión
           </button>
           <button id="tab-btn-register" class="pb-2 text-[#9A9A9A] uppercase transition-colors hover:text-[#262626]">
-            Registrarse
+            Registrarse como Cliente
           </button>
         </div>
       </div>
 
       <!-- Caja de Notificaciones / Errores -->
-      <div id="auth-message-box" class="hidden mb-6 p-3 text-xs border rounded-none"></div>
+      <div id="auth-message-box" class="hidden mb-6 p-3 text-xs border"></div>
 
       <!-- FORMULARIO 1: INICIAR SESIÓN -->
       <form id="form-login" class="space-y-5">
@@ -310,60 +310,203 @@
           <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1.5">Contraseña</label>
           <input type="password" id="login-contrasena" required placeholder="••••••••" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
         </div>
+        
         <button type="submit" class="btn-apex-exact w-full py-3.5 text-center justify-center">
           <span>ENTRAR AL SISTEMA</span>
           <span class="text-sm font-light arrow-icon">→</span>
         </button>
+
+        <!-- Tarjeta de Ayuda con Credenciales de Acceso Rápido -->
+        <div class="p-3 bg-[#FAFBFB] border border-[#ECECEC] text-[11px] font-mono text-neutral-500 mt-4">
+          <span class="font-bold text-[#262626] block mb-1">Perfiles de prueba en la base de datos:</span>
+          <div>🔑 <strong>Admin:</strong> <code>admin@clinicaoptica.com</code> / <code>admin123</code></div>
+          <div>👓 <strong>Cliente:</strong> <code>carlos@cliente.com</code> / <code>cliente123</code></div>
+        </div>
       </form>
 
-      <!-- FORMULARIO 2: REGISTRO (CON ROL, NOMBRE, CORREO Y CONTRASEÑA) -->
+      <!-- FORMULARIO 2: REGISTRO (EL ROL ES SIEMPRE CLIENTE) -->
       <form id="form-register" class="space-y-4 hidden">
         <div>
           <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Nombre Completo</label>
-          <input type="text" id="reg-nombre" required placeholder="Ej. Ana Martínez" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+          <input type="text" id="reg-nombre" required placeholder="Ej. Laura Gómez" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
         </div>
         <div>
           <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Correo Electrónico</label>
-          <input type="email" id="reg-correo" required placeholder="ana@ejemplo.com" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
+          <input type="email" id="reg-correo" required placeholder="laura@ejemplo.com" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
         </div>
         <div>
           <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Contraseña</label>
           <input type="password" id="reg-contrasena" required minlength="6" placeholder="Mínimo 6 caracteres" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
         </div>
-        <div>
-          <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#777777] mb-1">Rol en la Base de Datos</label>
-          <select id="reg-rol" class="w-full bg-white border border-[#ECECEC] p-3 text-xs text-[#262626] focus:outline-none focus:border-[#262626]">
-            <option value="cliente">Cliente / Paciente</option>
-            <option value="optometrista">Optometrista Especialista</option>
-            <option value="administrador">Administrador de Clínica</option>
-            <option value="recepcion">Recepción / Gestión</option>
-          </select>
+        
+        <div class="p-3 bg-[#FAFBFB] border border-[#ECECEC] text-[11px] text-neutral-500">
+          ✓ Al registrarte, tu cuenta se creará automáticamente como <strong>Cliente / Paciente</strong> de la clínica para gestionar tus pedidos y citas.
         </div>
+
         <button type="submit" class="btn-apex-exact w-full py-3.5 text-center justify-center mt-2">
-          <span>REGISTRAR EN BASE DE DATOS</span>
+          <span>REGISTRARSE COMO CLIENTE</span>
           <span class="text-sm font-light arrow-icon">→</span>
         </button>
       </form>
 
-      <!-- VISTA 3: PERFIL DE USUARIO LOGUEADO -->
-      <div id="user-profile-view" class="hidden space-y-6 text-center py-2">
-        <div class="w-14 h-14 bg-[#262626] text-white rounded-full flex items-center justify-center mx-auto text-xl font-bold">
-          👤
+      <!-- ==================== DASHBOARD VIEW (ACTIVO TRAS INICIAR SESIÓN) ==================== -->
+      <div id="dashboard-view" class="hidden space-y-6">
+        
+        <!-- Barra de Usuario Superior -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-[#ECECEC] gap-3">
+          <div>
+            <span class="text-[10px] font-mono tracking-widest text-[#9A9A9A] uppercase block">SESIÓN INICIADA</span>
+            <h3 id="dash-user-name" class="text-xl font-bold text-[#262626]"></h3>
+            <p id="dash-user-email" class="text-xs text-[#737373] font-mono"></p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="dash-user-role-badge"></span>
+            <button id="btn-logout" class="text-xs font-mono text-red-600 hover:text-red-800 underline uppercase tracking-wider">
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
-        <div>
-          <span id="profile-id" class="text-[10px] font-mono tracking-widest text-[#9A9A9A] block mb-1"></span>
-          <h3 id="profile-name" class="text-2xl font-[700] text-[#262626]"></h3>
-          <p id="profile-email" class="text-xs text-[#737373] mt-1"></p>
+
+        <!-- ==================== PANEL DEL CLIENTE ==================== -->
+        <div id="client-personal-panel" class="space-y-6 hidden">
+          
+          <!-- Bloque 1: Mis Pedidos y Productos Solicitados -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-xs font-bold font-mono tracking-wider text-[#262626] uppercase flex items-center gap-2">
+                <span>👓</span>
+                <span>Mis Pedidos y Productos Solicitados</span>
+              </h4>
+              <span class="text-[10px] font-mono text-neutral-400 uppercase">TIEMPO REAL</span>
+            </div>
+            <div id="client-orders-container">
+              <!-- Renderizado dinámico vía auth.js -->
+            </div>
+          </div>
+
+          <!-- Bloque 2: Mis Fechas de Quedada y Citas -->
+          <div class="pt-4 border-t border-[#ECECEC]">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-xs font-bold font-mono tracking-wider text-[#262626] uppercase flex items-center gap-2">
+                <span>📅</span>
+                <span>Mis Fechas de Quedada / Citas en Clínica</span>
+              </h4>
+              <span class="text-[10px] font-mono text-neutral-400 uppercase">GABINETE</span>
+            </div>
+            <div id="client-appointments-container">
+              <!-- Renderizado dinámico vía auth.js -->
+            </div>
+
+            <!-- Formulario Rápido para pedir nueva cita -->
+            <form id="client-form-new-appointment" class="mt-4 p-4 bg-[#FAFBFB] border border-[#ECECEC] space-y-3">
+              <span class="text-[10px] font-mono font-bold text-[#262626] uppercase block">Solicitar Nueva Fecha de Quedada:</span>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <select id="client-new-appt-service" class="bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+                  <option>Revisar la Vista (Graduación)</option>
+                  <option>Elegir Monturas Nuevas</option>
+                  <option>Adaptación de Lentillas</option>
+                  <option>Ajuste y Limpieza de Gafas</option>
+                </select>
+                <input type="date" id="client-new-appt-date" value="2026-11-26" required class="bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+                <input type="time" id="client-new-appt-time" value="12:00" required class="bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+              </div>
+              <button type="submit" class="btn-apex-exact py-2 px-4 text-[10px] w-full text-center justify-center">
+                CONFIRMAR CITA EN CLÍNICA
+              </button>
+            </form>
+          </div>
+
         </div>
-        <div class="p-3 bg-[#FAFBFB] border border-[#ECECEC] inline-block">
-          <span class="text-[10px] font-mono text-[#9A9A9A] uppercase tracking-wider block">ROL ASIGNADO:</span>
-          <span id="profile-role" class="text-xs font-bold text-[#262626] tracking-widest uppercase"></span>
+
+        <!-- ==================== PANEL DEL ADMINISTRADOR ==================== -->
+        <div id="admin-management-panel" class="space-y-6 hidden">
+          
+          <div class="p-3 bg-neutral-900 text-white text-xs font-mono">
+            <strong>PANEL DE CONTROL DEL ADMINISTRADOR</strong> — Gestión de pedidos de clientes, cambio de estados en tiempo real y agenda de citas.
+          </div>
+
+          <!-- Bloque Admin 1: Gestión de Pedidos de Clientes -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-xs font-bold font-mono tracking-wider text-[#262626] uppercase flex items-center gap-2">
+                <span>📦</span>
+                <span>Pedidos de Clientes (Seleccionar Estado)</span>
+              </h4>
+              <span class="text-[10px] font-mono text-neutral-500">BD SQLITE</span>
+            </div>
+            
+            <p class="text-[11px] text-neutral-500 mb-3">
+              Cambia el estado con el desplegable para cada pedido (<em>Pendiente</em>, <em>En taller / Pedido</em>, <em>Listo para recoger</em>, <em>Entregado</em>). Se guarda automáticamente.
+            </p>
+
+            <div id="admin-orders-container">
+              <!-- Renderizado dinámico vía auth.js con selectores de estado -->
+            </div>
+          </div>
+
+          <!-- Bloque Admin 2: Asignar Nuevo Pedido a un Cliente -->
+          <div class="pt-4 border-t border-[#ECECEC]">
+            <h4 class="text-xs font-bold font-mono tracking-wider text-[#262626] uppercase mb-3">
+              + Asignar / Registrar Nuevo Pedido a un Cliente
+            </h4>
+
+            <form id="admin-form-new-order" class="p-4 bg-[#FAFBFB] border border-[#ECECEC] space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[10px] font-mono text-neutral-500 uppercase mb-1">Cliente Receptor</label>
+                  <select id="new-order-client-select" class="w-full bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+                    <!-- Cargado dinámicamente con usuarios clientes -->
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10px] font-mono text-neutral-500 uppercase mb-1">Tipo de Producto</label>
+                  <select id="new-order-type" class="w-full bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+                    <option value="Gafas">Gafas Graduadas / Sol</option>
+                    <option value="Lentillas">Lentillas / Contactología</option>
+                    <option value="Cristales">Cambio de Cristales</option>
+                    <option value="Accesorio">Accesorio / Limpieza</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-mono text-neutral-500 uppercase mb-1">Descripción del Producto</label>
+                <input type="text" id="new-order-product" placeholder="Ej. Gafas Titanio Kobe + Lentes Antirreflejantes" required class="w-full bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[10px] font-mono text-neutral-500 uppercase mb-1">Estado Inicial</label>
+                  <select id="new-order-initial-status" class="w-full bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En taller / Pedido" selected>En taller / Pedido</option>
+                    <option value="Listo para recoger">Listo para recoger</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10px] font-mono text-neutral-500 uppercase mb-1">Notas Técnicas / Graduación</label>
+                  <input type="text" id="new-order-notes" placeholder="Ej. OD: -1.50, OI: -1.25" class="w-full bg-white border border-[#ECECEC] p-2 text-xs text-[#262626]">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-apex-exact py-2.5 px-5 text-[10px] w-full text-center justify-center">
+                REGISTRAR PEDIDO EN BASE DE DATOS
+              </button>
+            </form>
+          </div>
+
+          <!-- Bloque Admin 3: Citas de Pacientes -->
+          <div class="pt-4 border-t border-[#ECECEC]">
+            <h4 class="text-xs font-bold font-mono tracking-wider text-[#262626] uppercase mb-3">
+              Fechas de Quedada / Agenda de Citas de Clientes
+            </h4>
+            <div id="admin-appointments-container">
+              <!-- Renderizado dinámico vía auth.js -->
+            </div>
+          </div>
+
         </div>
-        <div>
-          <button id="btn-logout" class="w-full py-3 border border-red-300 text-red-600 hover:bg-red-50 text-xs font-semibold uppercase tracking-wider transition-colors">
-            Cerrar Sesión
-          </button>
-        </div>
+
       </div>
 
     </div>
@@ -388,7 +531,7 @@
     });
   </script>
 
-  <!-- Script de Autenticación y Base de Datos Local -->
+  <!-- Script de Autenticación, Pedidos y Citas con SQLite -->
   <script src="auth.js"></script>
 </body>
 </html>
