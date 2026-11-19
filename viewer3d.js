@@ -1,7 +1,7 @@
-// 3D Eyewear Viewer - Three.js PBR Studio Experience with GLTFLoader & Procedural Fallback
-import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+// 3D Eyewear Viewer - Three.js PBR Studio Experience with ImportMap & GLTFLoader
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 class GlassesViewer3D {
   constructor(containerId) {
@@ -18,21 +18,22 @@ class GlassesViewer3D {
     this.idleTimer = null;
     this.isResetting = false;
 
-    this.initialCameraPos = new THREE.Vector3(0, 0.45, 4.4);
+    // Camera positioned at an elegant 3/4 beauty angle
+    this.initialCameraPos = new THREE.Vector3(0.4, 0.4, 4.2);
     this.initialTarget = new THREE.Vector3(0, 0, 0);
 
-    // Color and Material PBR definitions
+    // Color and Material PBR definitions tailored for luxury acetate/metal sunglasses
     this.frameFinishes = {
-      black: { color: 0x141416, metalness: 0.82, roughness: 0.28, name: 'Negro Acetato / Titanio' },
-      gold: { color: 0xd4af37, metalness: 0.94, roughness: 0.16, name: 'Oro Champagne Satinado' },
-      silver: { color: 0xe5e7eb, metalness: 0.96, roughness: 0.14, name: 'Plata Quirúrgica' },
-      amber: { color: 0x8a4500, metalness: 0.15, roughness: 0.22, name: 'Bio-Acetato Ámbar' }
+      black: { color: 0x1a1a1c, metalness: 0.08, roughness: 0.22, name: 'Acetato Negro Pulido' },
+      gold: { color: 0xd4af37, metalness: 0.88, roughness: 0.18, name: 'Oro Champagne Satinado' },
+      silver: { color: 0xdedede, metalness: 0.92, roughness: 0.15, name: 'Plata Quirúrgica' },
+      amber: { color: 0x9b4e10, metalness: 0.12, roughness: 0.22, name: 'Bio-Acetato Ámbar' }
     };
 
     this.lensFinishes = {
-      clear: { color: 0xf3f4f6, opacity: 0.35, transmission: 0.92, roughness: 0.02, name: 'Transparente HD' },
-      green: { color: 0x162c22, opacity: 0.82, transmission: 0.35, roughness: 0.04, name: 'Solar Mineral Verde' },
-      blue: { color: 0x152238, opacity: 0.78, transmission: 0.38, roughness: 0.04, name: 'Degradé Azul Noche' }
+      clear: { color: 0xebf2f8, opacity: 0.35, transmission: 0.90, roughness: 0.02, name: 'Transparente HD' },
+      green: { color: 0x1a382b, opacity: 0.82, transmission: 0.35, roughness: 0.04, name: 'Solar Mineral Verde' },
+      blue: { color: 0x16263e, opacity: 0.78, transmission: 0.38, roughness: 0.04, name: 'Degradé Azul Noche' }
     };
 
     this.currentFrameFinish = 'black';
@@ -47,10 +48,10 @@ class GlassesViewer3D {
 
     // 1. Scene
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0e0e10);
+    this.scene.background = new THREE.Color(0x0e0e11);
 
     // 2. Camera
-    this.camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
+    this.camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
     this.camera.position.copy(this.initialCameraPos);
 
     // 3. Renderer with PBR settings
@@ -58,7 +59,7 @@ class GlassesViewer3D {
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.25;
+    this.renderer.toneMappingExposure = 1.35;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -73,7 +74,7 @@ class GlassesViewer3D {
     // 6. Soft Ground Contact Shadow
     this.createGroundShadow();
 
-    // 7. Load GLB Model (with procedural geometry fallback)
+    // 7. Load User's GLB Model
     this.loadGlassesModel('assets/plastic_sunglasses.glb');
 
     // 8. Event Listeners & UI Binding
@@ -87,30 +88,39 @@ class GlassesViewer3D {
 
   setupLighting() {
     // Ambient soft studio fill
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     this.scene.add(ambientLight);
 
+    // Hemisphere light: subtle ceiling glow + dark floor
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x18181c, 1.2);
+    this.scene.add(hemiLight);
+
     // Key Light (Warm top-right)
-    const keyLight = new THREE.DirectionalLight(0xfff8ee, 2.8);
-    keyLight.position.set(4, 6, 5);
+    const keyLight = new THREE.DirectionalLight(0xfff8ee, 3.2);
+    keyLight.position.set(4, 7, 5);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
     keyLight.shadow.mapSize.height = 1024;
     keyLight.shadow.bias = -0.0005;
     this.scene.add(keyLight);
 
-    // Fill Light (Cool soft fill from left)
-    const fillLight = new THREE.DirectionalLight(0xedf4ff, 1.6);
-    fillLight.position.set(-5, 3, 4);
+    // Fill Light (Cool soft fill from front-left)
+    const fillLight = new THREE.DirectionalLight(0xedf4ff, 2.0);
+    fillLight.position.set(-5, 4, 4);
     this.scene.add(fillLight);
 
+    // Front Center Soft Fill (Ensures the face of the glasses is never in shadow)
+    const frontLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    frontLight.position.set(0, 1, 6);
+    this.scene.add(frontLight);
+
     // Rim/Back Highlight Light (Outlines frame contours)
-    const rimLight = new THREE.DirectionalLight(0xffffff, 3.6);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 4.0);
     rimLight.position.set(0, 5, -5);
     this.scene.add(rimLight);
 
-    // Subtle bottom bounce light
-    const bounceLight = new THREE.PointLight(0xffffff, 0.9, 10);
+    // Bottom bounce light
+    const bounceLight = new THREE.PointLight(0xffffff, 1.2, 12);
     bounceLight.position.set(0, -2, 1);
     this.scene.add(bounceLight);
   }
@@ -123,8 +133,8 @@ class GlassesViewer3D {
     this.controls.autoRotateSpeed = 1.0;
     this.controls.enablePan = false;
 
-    // Movement limits as requested
-    this.controls.minDistance = 2.4;
+    // Movement limits
+    this.controls.minDistance = 2.2;
     this.controls.maxDistance = 6.8;
     this.controls.minPolarAngle = Math.PI / 4.2;      // Prevent extreme top-down
     this.controls.maxPolarAngle = Math.PI / 1.76;     // Prevent looking completely from below
@@ -151,9 +161,9 @@ class GlassesViewer3D {
     canvas.width = 256;
     canvas.height = 256;
     const ctx = canvas.getContext('2d');
-    const grad = ctx.createRadialGradient(128, 128, 10, 128, 128, 120);
-    grad.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
-    grad.addColorStop(0.35, 'rgba(0, 0, 0, 0.28)');
+    const grad = ctx.createRadialGradient(128, 128, 15, 128, 128, 120);
+    grad.addColorStop(0, 'rgba(0, 0, 0, 0.75)');
+    grad.addColorStop(0.35, 'rgba(0, 0, 0, 0.3)');
     grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 256, 256);
@@ -168,7 +178,7 @@ class GlassesViewer3D {
 
     const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
     shadowMesh.rotation.x = -Math.PI / 2;
-    shadowMesh.position.y = -0.95;
+    shadowMesh.position.y = -0.92;
     this.scene.add(shadowMesh);
   }
 
@@ -182,7 +192,6 @@ class GlassesViewer3D {
         this.processLoadedModel(gltf.scene);
       },
       (xhr) => {
-        // Progress
         const percent = xhr.total ? (xhr.loaded / xhr.total) * 100 : 0;
         console.log(`Loading 3D model: ${Math.round(percent)}%`);
       },
@@ -198,7 +207,9 @@ class GlassesViewer3D {
     this.frameMeshes = [];
     this.lensMeshes = [];
 
-    // Calculate Bounding Box to auto-center and scale
+    // Ensure all matrices are updated before bounding box calculation
+    modelScene.updateMatrixWorld(true);
+
     const box = new THREE.Box3().setFromObject(modelScene);
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
@@ -208,10 +219,10 @@ class GlassesViewer3D {
 
     // Scale to standardized protagonist viewport size (width ~ 3.4 units)
     const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 3.4 / (maxDim || 1);
+    const scale = 3.3 / (maxDim || 1);
     this.glassesGroup.scale.setScalar(scale);
 
-    // Frame & Lens PBR Materials
+    // Materials
     const frameConf = this.frameFinishes[this.currentFrameFinish];
     const lensConf = this.lensFinishes[this.currentLensFinish];
 
@@ -235,7 +246,13 @@ class GlassesViewer3D {
       clearcoatRoughness: 0.04
     });
 
-    // Traverse and identify frame vs lenses
+    const upgradedPinMat = new THREE.MeshStandardMaterial({
+      color: 0xd4af37,
+      metalness: 0.95,
+      roughness: 0.15
+    });
+
+    // Traverse and categorize meshes
     modelScene.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
@@ -244,16 +261,20 @@ class GlassesViewer3D {
         const matName = child.material ? child.material.name : '';
         const meshName = (child.name || '').toLowerCase();
 
-        // Check if mesh is a lens (by material name 'material_3' or transparency)
+        // Check if lens (material_3 in this model)
         const isLens = matName === 'material_3' || 
                        meshName.includes('lens') || 
                        meshName.includes('glass') || 
-                       meshName.includes('cristal') ||
-                       (child.material && child.material.transparent && child.material.opacity < 0.8);
+                       meshName.includes('cristal');
+
+        // Check if metal pin (material_2 in this model)
+        const isPin = matName === 'material_2' || meshName.includes('pin');
 
         if (isLens) {
           child.material = upgradedLensMat.clone();
           this.lensMeshes.push(child);
+        } else if (isPin) {
+          child.material = upgradedPinMat.clone();
         } else {
           // Frame or temple mesh
           child.material = upgradedFrameMat.clone();
@@ -264,12 +285,12 @@ class GlassesViewer3D {
 
     this.glassesGroup.add(modelScene);
     // Slight elevation above ground
-    this.glassesGroup.position.set(0, 0.08, 0);
+    this.glassesGroup.position.set(0, 0.06, 0);
     this.scene.add(this.glassesGroup);
 
-    // Update labels if needed
+    // Update labels
     const modelBadge = document.getElementById('viewer-model-title');
-    if (modelBadge) modelBadge.textContent = 'Montura Sol / Acetato Pulido';
+    if (modelBadge) modelBadge.textContent = 'Montura Sol Classic (GLB)';
   }
 
   createProceduralGlasses() {
@@ -439,7 +460,7 @@ class GlassesViewer3D {
     this.isResetting = true;
     const startPos = this.camera.position.clone();
     const targetPos = this.initialCameraPos.clone();
-    const duration = 800; // ms
+    const duration = 800;
     const startTime = performance.now();
 
     const animateReset = (now) => {
