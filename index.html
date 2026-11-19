@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APEX OPTIQUE | Claridad en Cada Mirada | Atelier & Gabinete Óptico</title>
-  <meta name="description" content="Atelier de optometría avanzada y monturas de autor. Trasladamos la precisión arquitectónica al cuidado de tu salud visual.">
+  <title>Clínica Óptica | Precisión y Cuidado Visual</title>
+  
+  <!-- Inter Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,577 +17,122 @@
       theme: {
         extend: {
           fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
           },
           colors: {
-            apex: {
-              black: '#111111',
-              dark: '#1C1C1E',
-              gray: '#737373',
-              lightGray: '#F3F4F6',
-              border: '#E8EAEB',
-              bg: '#FAFBFB',
-            }
+            apexDark: '#262626',
+            apexGray: '#797979',
+            apexBody: '#737373',
+            apexNav: '#9A9A9A',
+            apexBorder: '#ECECEC',
+            apexBtn: '#2A2A28',
           }
         }
       }
     }
   </script>
 
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#FAFBFB] text-neutral-900 selection:bg-neutral-900 selection:text-white">
+<body class="bg-white text-[#262626] font-sans antialiased selection:bg-[#262626] selection:text-white">
 
-  <!-- Architectural Background Grid Overlay (Matching Reference) -->
-  <div class="architectural-grid">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
-  <!-- ==================== HEADER / NAVIGATION ==================== -->
-  <header class="sticky top-0 z-50 bg-[#FAFBFB]/90 backdrop-blur-md border-b border-neutral-200/60 transition-all">
-    <div class="max-w-[1440px] mx-auto px-6 sm:px-12 h-20 flex items-center justify-between">
+  <!-- ==================== BARRA DE NAVEGACIÓN SUPERIOR ==================== -->
+  <header class="w-full bg-white border-b border-[#ECECEC] sticky top-0 z-50">
+    <div class="max-w-[1360px] mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
       
-      <!-- Logo (Matching APEX Reference) -->
-      <a href="#" class="flex items-baseline gap-3 group">
-        <span class="font-display font-extrabold text-2xl tracking-tight text-neutral-900">APEX</span>
-        <span class="font-mono text-[10px] tracking-[0.25em] text-neutral-400 uppercase hidden sm:inline">OPTIQUE</span>
+      <!-- Logotipo de la Clínica -->
+      <a href="#" class="font-[800] text-[17px] tracking-[-0.01em] text-[#222222] hover:opacity-80 transition-opacity uppercase">
+        Clínica Óptica
       </a>
 
-      <!-- Desktop Navigation Links (SERVICES, TESTIMONIALS, CONTACT, LOCATION from image) -->
-      <nav class="hidden md:flex items-center space-x-8 lg:space-x-12">
-        <a href="#servicios" class="nav-link">SERVICIOS</a>
-        <a href="#coleccion" class="nav-link">COLECCIONES</a>
-        <a href="#simulador" class="nav-link">CLARIDAD HD</a>
-        <a href="#testimonios" class="nav-link">TESTIMONIOS</a>
-        <a href="#ubicacion" class="nav-link">LOCALIZACIÓN</a>
+      <!-- Menú en español según la retícula de referencia -->
+      <nav class="hidden md:flex items-center space-x-10 text-[11px] font-medium tracking-[0.2em] text-[#9A9A9A]">
+        <a href="#servicios" class="hover:text-[#222222] transition-colors">SERVICIOS</a>
+        <a href="#testimonios" class="hover:text-[#222222] transition-colors">TESTIMONIOS</a>
+        <a href="#contacto" class="hover:text-[#222222] transition-colors">CONTACTO</a>
+        <a href="#ubicacion" class="hover:text-[#222222] transition-colors">UBICACIÓN</a>
       </nav>
 
-      <!-- Action Button -->
-      <div class="hidden sm:flex items-center gap-4">
-        <button class="open-booking-modal-btn btn-apex py-2.5 px-5 text-[11px]" data-service="Examen Optométrico Wavefront 3D">
-          <span>RESERVAR CITA</span>
-          <svg class="w-3.5 h-3.5 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </button>
-      </div>
-
-      <!-- Mobile Hamburger Button -->
-      <button id="mobile-menu-toggle" class="md:hidden p-2 text-neutral-800 hover:text-black focus:outline-none" aria-label="Abrir menú">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <!-- Botón móvil -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-[#222222]" aria-label="Menú">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
+
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div id="mobile-drawer" class="fixed inset-y-0 right-0 z-50 w-80 bg-white shadow-2xl p-8 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-between">
+  <!-- Menú móvil desplegable -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-white p-8 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-between">
     <div>
-      <div class="flex items-center justify-between pb-6 border-b border-neutral-100 mb-8">
-        <span class="font-display font-extrabold text-xl tracking-tight">APEX OPTIQUE</span>
-        <button id="close-drawer" class="p-2 text-neutral-500 hover:text-black">
+      <div class="flex items-center justify-between pb-6 border-b border-[#ECECEC] mb-8">
+        <span class="font-[800] text-lg text-[#222222] uppercase">Clínica Óptica</span>
+        <button id="close-drawer" class="p-2 text-[#797979]">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-      <nav class="flex flex-col space-y-6">
-        <a href="#servicios" class="mobile-nav-link text-sm font-semibold tracking-widest uppercase text-neutral-700 hover:text-black">SERVICIOS</a>
-        <a href="#coleccion" class="mobile-nav-link text-sm font-semibold tracking-widest uppercase text-neutral-700 hover:text-black">COLECCIONES</a>
-        <a href="#simulador" class="mobile-nav-link text-sm font-semibold tracking-widest uppercase text-neutral-700 hover:text-black">SIMULADOR CLARIDAD HD</a>
-        <a href="#filosofia" class="mobile-nav-link text-sm font-semibold tracking-widest uppercase text-neutral-700 hover:text-black">FILOSOFÍA</a>
-        <a href="#testimonios" class="mobile-nav-link text-sm font-semibold tracking-widest uppercase text-neutral-700 hover:text-black">TESTIMONIOS</a>
-        <a href="#ubicacion" class="mobile-nav-link text-sm font-semibold tracking-widest uppercase text-neutral-700 hover:text-black">LOCALIZACIÓN</a>
+      <nav class="flex flex-col space-y-6 text-xs font-semibold tracking-[0.2em] text-[#222222]">
+        <a href="#servicios" class="mobile-link">SERVICIOS</a>
+        <a href="#testimonios" class="mobile-link">TESTIMONIOS</a>
+        <a href="#contacto" class="mobile-link">CONTACTO</a>
+        <a href="#ubicacion" class="mobile-link">UBICACIÓN</a>
       </nav>
     </div>
-    <div class="pt-8 border-t border-neutral-100">
-      <button class="open-booking-modal-btn btn-apex w-full text-center" data-service="Examen Optométrico Wavefront 3D">
-        RESERVAR CITA CLÍNICA
-      </button>
-      <p class="font-mono text-[11px] text-neutral-400 text-center mt-3">Gabinete Colegiado nº 14.892</p>
+    <div class="pt-6 border-t border-[#ECECEC]">
+      <p class="text-[11px] text-[#797979] uppercase tracking-wider">CUIDADO VISUAL & ATELIER</p>
     </div>
   </div>
 
   <main>
-    <!-- ==================== HERO SECTION (FAITHFUL TO REFERENCE IMAGE) ==================== -->
-    <section class="relative min-h-[calc(100vh-5rem)] flex items-center border-b border-neutral-200/60 overflow-hidden">
-      <div class="max-w-[1440px] mx-auto w-full px-6 sm:px-12 py-12 lg:py-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <!-- ==================== SECCIÓN HERO (CALCO EXACTO A LA FOTO DE REFERENCIA) ==================== -->
+    <section class="w-full bg-white border-b border-[#ECECEC]">
+      <div class="max-w-[1360px] mx-auto px-6 sm:px-10">
+        
+        <!-- Retícula arquitectónica de 3 columnas iguales -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 border-l border-r border-[#ECECEC]">
           
-          <!-- LEFT COLUMN: Typography & Content (Matches Reference Left Side) -->
-          <div class="lg:col-span-7 xl:col-span-7 flex flex-col justify-center pr-0 lg:pr-8">
-            
-            <!-- Eyebrow: Line + EST. 2024 -->
-            <div class="flex items-center gap-3 mb-8">
-              <span class="w-9 h-[1.5px] bg-neutral-400"></span>
-              <span class="font-mono text-xs tracking-[0.25em] text-neutral-500 font-medium uppercase">
-                EST. 2024 · ATELIER & CLINIC
-              </span>
+          <!-- COLUMNA 1: Contenido izquierdo -->
+          <div class="relative pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-24 px-6 sm:px-10 lg:border-r border-[#ECECEC] flex flex-col justify-between">
+            <div>
+              <!-- Eyebrow: Línea horizontal + EST. 2024 -->
+              <div class="flex items-center gap-3 mb-8">
+                <span class="w-7 h-[1px] bg-[#999999]"></span>
+                <span class="text-[10px] tracking-[0.22em] font-medium text-[#777777] uppercase">EST. 2024</span>
+              </div>
+
+              <!-- Gran Titular a dos tonos: "Clínica" (Negro) / "Óptica." (Gris con punto) -->
+              <div class="relative z-20">
+                <h1 class="hero-headline text-[3.8rem] sm:text-[5rem] lg:text-[5.6rem] xl:text-[6.4rem] tracking-[-0.04em] leading-[0.92] select-none headline-overflow">
+                  <span class="block text-[#262626]">Clínica</span>
+                  <span class="block text-[#797979]">Óptica.</span>
+                </h1>
+              </div>
+
+              <!-- Párrafo en español adaptado con la misma longitud y ritmo que la foto -->
+              <p class="mt-8 text-[13.5px] sm:text-[14px] text-[#737373] leading-[1.65] max-w-[340px] font-normal">
+                Servicios de optometría avanzada y diseño de monturas a medida. Aplicamos precisión arquitectónica al cuidado integral de la visión.
+              </p>
             </div>
 
-            <!-- Main Headline: "Clarity in" (Black) / "Complexity." (Gray) -->
-            <h1 class="hero-headline text-[3.8rem] sm:text-[5.2rem] lg:text-[6.4rem] tracking-[-0.035em] mb-8 select-none">
-              <span class="text-neutral-900 block">Claridad en</span>
-              <span class="text-neutral-400 block transition-colors duration-500 hover:text-neutral-500">Cada Mirada.</span>
-            </h1>
-
-            <!-- Boutique Subtitle (Faithful Tone to Reference) -->
-            <p class="text-base sm:text-lg text-neutral-600 leading-relaxed max-w-xl mb-10 font-normal">
-              Gabinete de optometría de alta precisión y monturas de autor. Trasladamos la pureza arquitectónica y la calibración milimétrica a la salud y expresión de tu visión.
-            </p>
-
-            <!-- Buttons Area -->
-            <div class="flex flex-wrap items-center gap-4">
-              <a href="#coleccion" class="btn-apex">
-                <span>EXPLORAR COLECCIÓN</span>
-                <svg class="w-4 h-4 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
+            <!-- Botón negro con flecha idéntico a la referencia -->
+            <div class="mt-10">
+              <a href="#servicios" class="btn-apex-exact">
+                <span>EXPLORAR SERVICIOS</span>
+                <span class="text-sm font-light arrow-icon">→</span>
               </a>
-
-              <button class="open-booking-modal-btn btn-apex-outline" data-service="Examen Optométrico Wavefront 3D">
-                <span>RESERVAR EXAMEN CLÍNICO</span>
-              </button>
-            </div>
-
-            <!-- Micro specs bar -->
-            <div class="grid grid-cols-3 gap-6 pt-12 mt-12 border-t border-neutral-200/60 max-w-lg">
-              <div>
-                <span class="font-mono text-[11px] text-neutral-400 block uppercase tracking-wider">Precisión</span>
-                <span class="font-display font-bold text-lg text-neutral-900">0.01 Dioptrías</span>
-              </div>
-              <div>
-                <span class="font-mono text-[11px] text-neutral-400 block uppercase tracking-wider">Material</span>
-                <span class="font-display font-bold text-lg text-neutral-900">Titanio Beta 5</span>
-              </div>
-              <div>
-                <span class="font-mono text-[11px] text-neutral-400 block uppercase tracking-wider">Garantía</span>
-                <span class="font-display font-bold text-lg text-neutral-900">Adaptación Total</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- RIGHT COLUMN: Framed Image (Faithful to Reference Right Side) -->
-          <div class="lg:col-span-5 xl:col-span-5 flex flex-col items-center lg:items-end">
-            <div class="w-full max-w-md">
-              
-              <!-- Subtle View Selector for the Frame -->
-              <div class="flex items-center justify-between pb-3 mb-3 text-[11px] font-mono tracking-wider text-neutral-400 uppercase border-b border-neutral-200/50">
-                <span>PERSPECTIVA VISUAL:</span>
-                <div class="flex items-center gap-3">
-                  <button id="hero-view-atelier" class="text-neutral-900 font-bold border-b-2 border-neutral-900 pb-0.5 hover:text-neutral-900 transition-colors">
-                    ATELIER
-                  </button>
-                  <span class="text-neutral-300">/</span>
-                  <button id="hero-view-frame" class="text-neutral-400 hover:text-neutral-900 transition-colors">
-                    MONTURA APX-01
-                  </button>
-                </div>
-              </div>
-
-              <!-- Framed Container Matching Reference Layout -->
-              <div class="frame-container group">
-                <div class="relative overflow-hidden bg-neutral-100">
-                  <img id="hero-frame-image" src="assets/reference.jpg" alt="APEX Flagship Atelier" class="frame-inner-image transition-transform duration-700 ease-out group-hover:scale-[1.02]">
-                  
-                  <!-- Architectural Badge Overlay -->
-                  <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm p-3 border border-neutral-200/60 flex items-center justify-between shadow-sm">
-                    <div>
-                      <span id="hero-caption-badge" class="font-mono text-[10px] tracking-wider text-neutral-700 block uppercase font-medium">
-                        ESPACIO ARQUITECTÓNICO · FLAGSHIP ATELIER
-                      </span>
-                      <span class="font-sans text-xs text-neutral-500">Madrid · C/ Jorge Juan 18</span>
-                    </div>
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Atelier abierto"></span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Technical architectural caption below frame -->
-              <p class="font-mono text-[11px] text-neutral-400 tracking-wide mt-4 text-right">
-                FIG. 01 — SIMETRÍA, LUZ NATURAL Y GEOMETRÍA ÓPTICA
-              </p>
-
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== SECTION 2: INTERACTIVE VISION SIMULATOR ==================== -->
-    <section id="simulador" class="py-24 border-b border-neutral-200/60 bg-white relative">
-      <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-        
-        <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-neutral-200/60">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <span class="w-6 h-[1.5px] bg-neutral-900"></span>
-              <span class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">TECNOLOGÍA WAVEFRONT</span>
-            </div>
-            <h2 class="font-display font-bold text-3xl sm:text-5xl text-neutral-900 tracking-tight">
-              La Ciencia de la Claridad
-            </h2>
-          </div>
-          <p class="text-neutral-500 max-w-md mt-4 md:mt-0 text-sm sm:text-base leading-relaxed">
-            Arrastra el selector para comparar la distorsión periférica de una lente estándar frente a la nitidez cristalina absoluta de nuestras lentes personalizadas APEX FreeForm HD.
-          </p>
-        </div>
-
-        <!-- Presets Selection Bar -->
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-          <span class="font-mono text-xs text-neutral-400 uppercase tracking-wider mr-2">Simular patología:</span>
-          <button class="vision-preset-btn px-4 py-2 border text-xs font-mono tracking-wider uppercase transition-all bg-neutral-900 text-white" data-preset="astigmatism">
-            Astigmatismo & Aberración
-          </button>
-          <button class="vision-preset-btn px-4 py-2 border border-neutral-200 text-neutral-700 bg-white text-xs font-mono tracking-wider uppercase transition-all hover:border-neutral-900" data-preset="blur">
-            Miopía / Desenfoque Periférico
-          </button>
-          <button class="vision-preset-btn px-4 py-2 border border-neutral-200 text-neutral-700 bg-white text-xs font-mono tracking-wider uppercase transition-all hover:border-neutral-900" data-preset="glare">
-            Reflejos Nocturnos & Luz Azul
-          </button>
-        </div>
-
-        <!-- Interactive Comparison Canvas / Slider -->
-        <div id="vision-slider" class="vision-slider-wrapper rounded-sm cursor-ew-resize relative">
-          
-          <!-- Background Layer: Clear Vision (APEX HD) -->
-          <div class="vision-layer">
-            <img src="assets/boutique-interior.jpg" alt="Visión Clara APEX HD">
-            <div class="absolute top-6 right-6 bg-black/80 text-white font-mono text-xs px-3 py-1.5 backdrop-blur-md border border-white/20">
-              LENTE APEX FREEFORM HD (100% NITIDEZ)
-            </div>
+          <!-- COLUMNA 2: Espacio negativo arquitectónico con línea vertical divisoria -->
+          <div class="hidden lg:block lg:border-r border-[#ECECEC] relative">
+            <!-- Espacio limpio de respiración característico del diseño suizo -->
           </div>
 
-          <!-- Foreground Layer: Clipped Blurry Vision -->
-          <div id="vision-clipped" class="vision-after-clipped">
-            <div class="vision-layer vision-before" style="width: 1440px; max-width: 100vw;">
-              <img src="assets/boutique-interior.jpg" alt="Visión Estándar Aberrante">
-              <div class="absolute top-6 left-6 bg-neutral-900/80 text-neutral-300 font-mono text-xs px-3 py-1.5 backdrop-blur-md border border-white/10">
-                VISIÓN CONVENCIONAL CON ABERRACIÓN
-              </div>
-            </div>
-          </div>
-
-          <!-- Split Handle -->
-          <div id="vision-handle" class="vision-handle" style="left: 50%;">
-            <div class="vision-handle-button">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
-              </svg>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Features Grid Below Simulator -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 pt-8 border-t border-neutral-200/60">
-          <div class="p-6 bg-neutral-50 border border-neutral-200/70">
-            <span class="font-mono text-xs text-neutral-400 block mb-2">01 / MAPEO WAVEFRONT</span>
-            <h3 class="font-display font-bold text-lg text-neutral-900 mb-2">Análisis de 1.500 Puntos</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">
-              Detectamos micro-aberraciones corneales de orden superior que las graduaciones estándar nunca corrigen.
-            </p>
-          </div>
-          <div class="p-6 bg-neutral-50 border border-neutral-200/70">
-            <span class="font-mono text-xs text-neutral-400 block mb-2">02 / TALLADO DIGITAL FREEFORM</span>
-            <h3 class="font-display font-bold text-lg text-neutral-900 mb-2">Cálculo de Punto a Punto</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">
-              Superficie óptica tallada por control numérico con una precisión de 0.01 dioptrías, eliminando el efecto túnel.
-            </p>
-          </div>
-          <div class="p-6 bg-neutral-50 border border-neutral-200/70">
-            <span class="font-mono text-xs text-neutral-400 block mb-2">03 / TRATAMIENTO NANO-CAPAS</span>
-            <h3 class="font-display font-bold text-lg text-neutral-900 mb-2">99.8% Transmitancia de Luz</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">
-              16 capas antirreflejo nanométricas, filtro selectivo UV400 y capa oleofóbica repelente de polvo y huellas.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==================== SECTION 3: EYEWEAR ATELIER CATALOG ==================== -->
-    <section id="coleccion" class="py-24 border-b border-neutral-200/60">
-      <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-        
-        <!-- Header & Category Filters -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <span class="w-6 h-[1.5px] bg-neutral-900"></span>
-              <span class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">ATELIER EYEWEAR</span>
-            </div>
-            <h2 class="font-display font-bold text-3xl sm:text-5xl text-neutral-900 tracking-tight">
-              Colección Arquitectónica
-            </h2>
-          </div>
-
-          <!-- Filter Tabs -->
-          <div class="flex flex-wrap items-center gap-2 mt-6 md:mt-0">
-            <button class="catalog-filter-btn px-4 py-2 font-mono text-xs tracking-wider uppercase border border-neutral-900 bg-neutral-900 text-white transition-all" data-filter="all">
-              Todas
-            </button>
-            <button class="catalog-filter-btn px-4 py-2 font-mono text-xs tracking-wider uppercase border border-neutral-200 text-neutral-600 bg-transparent hover:border-neutral-900 transition-all" data-filter="titanium">
-              Titanio Beta
-            </button>
-            <button class="catalog-filter-btn px-4 py-2 font-mono text-xs tracking-wider uppercase border border-neutral-200 text-neutral-600 bg-transparent hover:border-neutral-900 transition-all" data-filter="acetate">
-              Bio-Acetato
-            </button>
-            <button class="catalog-filter-btn px-4 py-2 font-mono text-xs tracking-wider uppercase border border-neutral-200 text-neutral-600 bg-transparent hover:border-neutral-900 transition-all" data-filter="sunglasses">
-              Solar Polarizado
-            </button>
-            <button class="catalog-filter-btn px-4 py-2 font-mono text-xs tracking-wider uppercase border border-neutral-200 text-neutral-600 bg-transparent hover:border-neutral-900 transition-all" data-filter="rimless">
-              Sin Montura
-            </button>
-          </div>
-        </div>
-
-        <!-- Eyewear Cards Grid -->
-        <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Rendered dynamically by app.js -->
-        </div>
-
-        <!-- Custom Frame Consultation Banner -->
-        <div class="mt-16 p-8 sm:p-12 bg-neutral-900 text-white flex flex-col md:flex-row items-center justify-between gap-8 border border-neutral-800">
-          <div>
-            <span class="font-mono text-xs tracking-widest text-neutral-400 block mb-2 uppercase">BESPOKE ATELIER SERVICE</span>
-            <h3 class="font-display font-bold text-2xl sm:text-3xl">¿Buscas una montura adaptada a tu anatomía?</h3>
-            <p class="text-neutral-400 text-sm sm:text-base mt-2 max-w-xl">
-              Nuestros optometristas y diseñadores realizan un estudio morfológico craneofacial 3D para diseñar o ajustar monturas al milímetro exacto de tu puente nasal y curvatura temporal.
-            </p>
-          </div>
-          <button class="open-booking-modal-btn bg-white text-neutral-900 font-semibold px-8 py-4 text-xs font-mono tracking-widest uppercase hover:bg-neutral-100 transition-all whitespace-nowrap" data-service="Asesoramiento Morfológico de Monturas">
-            SOLICITAR ESTUDIO MORFOLÓGICO
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==================== SECTION 4: CLINICAL SERVICES ==================== -->
-    <section id="servicios" class="py-24 border-b border-neutral-200/60 bg-white">
-      <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-        
-        <div class="max-w-2xl mb-16">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="w-6 h-[1.5px] bg-neutral-900"></span>
-            <span class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">OPTOMETRÍA AVANZADA</span>
-          </div>
-          <h2 class="font-display font-bold text-3xl sm:text-5xl text-neutral-900 tracking-tight">
-            Servicios Clínicos Especializados
-          </h2>
-          <p class="text-neutral-600 mt-4 text-base leading-relaxed">
-            Diagnóstico integral de la visión con tecnología de grado oftalmológico. No realizamos revisiones apresuradas: cada sesión clínica dura un mínimo de 45 minutos.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
-          <!-- Service 1 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between hover:border-neutral-900 transition-colors group">
-            <div>
-              <span class="font-mono text-2xl font-bold text-neutral-300 group-hover:text-neutral-900 transition-colors block mb-6">01</span>
-              <h3 class="font-display font-bold text-xl text-neutral-900 mb-3">Examen Optométrico Wavefront 3D</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed">
-                Graduación refractiva computarizada binocular, evaluación de visión binocular y motilidad ocular para eliminar la fatiga visual ante pantallas.
-              </p>
-            </div>
-            <div class="pt-8 mt-6 border-t border-neutral-100 flex items-center justify-between">
-              <span class="font-mono text-xs text-neutral-400">45 MIN · 60 €*</span>
-              <button class="open-booking-modal-btn text-xs font-bold uppercase tracking-wider text-neutral-900 group-hover:underline" data-service="Examen Optométrico Wavefront 3D">
-                Reservar →
-              </button>
-            </div>
-          </div>
-
-          <!-- Service 2 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between hover:border-neutral-900 transition-colors group">
-            <div>
-              <span class="font-mono text-2xl font-bold text-neutral-300 group-hover:text-neutral-900 transition-colors block mb-6">02</span>
-              <h3 class="font-display font-bold text-xl text-neutral-900 mb-3">Topografía Corneal & Queratometría</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed">
-                Mapeo altimétrico de elevación corneal para diagnóstico de queratocono, ectasias y adaptación de lentes de contacto esclerales y RGP.
-              </p>
-            </div>
-            <div class="pt-8 mt-6 border-t border-neutral-100 flex items-center justify-between">
-              <span class="font-mono text-xs text-neutral-400">40 MIN · 75 €</span>
-              <button class="open-booking-modal-btn text-xs font-bold uppercase tracking-wider text-neutral-900 group-hover:underline" data-service="Topografía Corneal">
-                Reservar →
-              </button>
-            </div>
-          </div>
-
-          <!-- Service 3 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between hover:border-neutral-900 transition-colors group">
-            <div>
-              <span class="font-mono text-2xl font-bold text-neutral-300 group-hover:text-neutral-900 transition-colors block mb-6">03</span>
-              <h3 class="font-display font-bold text-xl text-neutral-900 mb-3">Retinografía Digital No Midriática</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed">
-                Exploración fotográfica en alta resolución del fondo de ojo, mácula y nervio óptico sin necesidad de dilatar la pupila con gotas.
-              </p>
-            </div>
-            <div class="pt-8 mt-6 border-t border-neutral-100 flex items-center justify-between">
-              <span class="font-mono text-xs text-neutral-400">30 MIN · 50 €</span>
-              <button class="open-booking-modal-btn text-xs font-bold uppercase tracking-wider text-neutral-900 group-hover:underline" data-service="Retinografía Digital">
-                Reservar →
-              </button>
-            </div>
-          </div>
-
-          <!-- Service 4 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between hover:border-neutral-900 transition-colors group">
-            <div>
-              <span class="font-mono text-2xl font-bold text-neutral-300 group-hover:text-neutral-900 transition-colors block mb-6">04</span>
-              <h3 class="font-display font-bold text-xl text-neutral-900 mb-3">Control de Miopía Infantil & Orto-K</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed">
-                Tratamientos de ortoqueratología nocturna y lentes con tecnología D.I.M.S. para ralentizar activamente la progresión miópica en niños y jóvenes.
-              </p>
-            </div>
-            <div class="pt-8 mt-6 border-t border-neutral-100 flex items-center justify-between">
-              <span class="font-mono text-xs text-neutral-400">60 MIN · 90 €</span>
-              <button class="open-booking-modal-btn text-xs font-bold uppercase tracking-wider text-neutral-900 group-hover:underline" data-service="Control de Miopía Infantil & Orto-K">
-                Reservar →
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <p class="font-mono text-[11px] text-neutral-400 mt-6 text-right">
-          * El importe del examen óptico se descuenta íntegramente al adquirir tu montura o lentes completas.
-        </p>
-
-      </div>
-    </section>
-
-    <!-- ==================== SECTION 5: PHILOSOPHY & CRAFTSMANSHIP ==================== -->
-    <section id="filosofia" class="py-24 border-b border-neutral-200/60 bg-[#FAFBFB]">
-      <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div class="lg:col-span-5">
-            <div class="frame-container">
-              <img src="assets/craftsmanship.jpg" alt="Artesanía y calibración óptica" class="w-full aspect-[4/5] object-cover">
-              <div class="p-4 bg-white border-t border-neutral-100 mt-2">
-                <span class="font-mono text-[10px] text-neutral-400 tracking-wider block">PROCESO MANUAL</span>
-                <span class="font-display text-sm font-bold text-neutral-900">48 etapas de acabado y biselado manual</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="lg:col-span-7 lg:pl-12">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="w-8 h-[1.5px] bg-neutral-900"></span>
-              <span class="font-mono text-xs tracking-[0.25em] text-neutral-500 uppercase">FILOSOFÍA DE DISEÑO</span>
-            </div>
-            
-            <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-neutral-900 leading-tight mb-8">
-              "No diseñamos gafas.<br>
-              <span class="text-neutral-400">Esculpimos instrumentos ópticos para el rostro."</span>
-            </h2>
-
-            <div class="space-y-6 text-neutral-600 leading-relaxed text-base sm:text-lg">
-              <p>
-                Al igual que un edificio depende de su estructura portante y del equilibrio de fuerzas para sostenerse en armonía con su entorno, una gafa perfecta debe distribuir sus puntos de presión anatómica para hacerse prácticamente ingrávida.
-              </p>
-              <p>
-                Trabajamos exclusivamente con talleres artesanales de Fukui (Japón) y Cadore (Italia), donde el titanio beta de pureza aeroespacial se moldea a mano y los acetatos de celulosa reposan durante meses antes de recibir su pulido con viruta de abedul.
-              </p>
-            </div>
-
-            <!-- Pillars -->
-            <div class="grid grid-cols-2 gap-8 mt-10 pt-8 border-t border-neutral-200/80">
-              <div>
-                <span class="font-mono text-3xl font-bold text-neutral-900 block mb-1">4.2 g</span>
-                <span class="font-sans font-medium text-sm text-neutral-800 block">Peso mínimo de montura</span>
-                <span class="text-xs text-neutral-500 mt-1 block">Confort total durante más de 16 horas continuas de uso.</span>
-              </div>
-              <div>
-                <span class="font-mono text-3xl font-bold text-neutral-900 block mb-1">100%</span>
-                <span class="font-sans font-medium text-sm text-neutral-800 block">Biocompatibilidad</span>
-                <span class="text-xs text-neutral-500 mt-1 block">Libre de níquel y metales pesados alergénicos.</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== SECTION 6: EDITORIAL TESTIMONIALS ==================== -->
-    <section id="testimonios" class="py-24 border-b border-neutral-200/60 bg-white">
-      <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-neutral-200/60">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <span class="w-6 h-[1.5px] bg-neutral-900"></span>
-              <span class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">TESTIMONIOS</span>
-            </div>
-            <h2 class="font-display font-bold text-3xl sm:text-5xl text-neutral-900 tracking-tight">
-              Palabras de Quienes Ven con APEX
-            </h2>
-          </div>
-          <span class="font-mono text-xs text-neutral-400 mt-4 md:mt-0 uppercase tracking-widest">
-            VALORACIÓN MEDIA: 4.98 / 5.00 · 340+ PACIENTES
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          <!-- Testimonial 1 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-neutral-900 mb-6 font-mono text-sm">
-                ★★★★★
-              </div>
-              <p class="font-display text-lg text-neutral-800 italic leading-snug mb-8">
-                "Como arquitecto, la distorsión que sufría con mis antiguas gafas en los bordes de la pantalla era insoportable. Las lentes FreeForm de APEX cambiaron radicalmente mi jornada de trabajo. La montura de titanio no se siente en absoluto."
-              </p>
-            </div>
-            <div>
-              <span class="font-sans font-bold text-neutral-900 block text-sm">Martín Sotomayor</span>
-              <span class="font-mono text-xs text-neutral-400 block mt-0.5">Arquitecto y Director en Estudio Bau</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 2 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between bg-neutral-50/50">
-            <div>
-              <div class="flex items-center gap-1 text-neutral-900 mb-6 font-mono text-sm">
-                ★★★★★
-              </div>
-              <p class="font-display text-lg text-neutral-800 italic leading-snug mb-8">
-                "El nivel de diagnóstico clínico no tiene comparación. Detectaron una tensión acomodativa que ninguna otra óptica había medido antes. Además, el espacio y el trato respiran serenidad y rigor estético."
-              </p>
-            </div>
-            <div>
-              <span class="font-sans font-bold text-neutral-900 block text-sm">Dra. Elena Vázquez</span>
-              <span class="font-mono text-xs text-neutral-400 block mt-0.5">Cirujana y Docente Universitaria</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 3 -->
-          <div class="border border-neutral-200 p-8 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-neutral-900 mb-6 font-mono text-sm">
-                ★★★★★
-              </div>
-              <p class="font-display text-lg text-neutral-800 italic leading-snug mb-8">
-                "Buscaba una montura que tuviera personalidad sobria sin parecer un logotipo publicitario andante. Las piezas que tienen aquí son auténticas obras de arte silencioso. Totalmente recomendables."
-              </p>
-            </div>
-            <div>
-              <span class="font-sans font-bold text-neutral-900 block text-sm">Guillermo R. Aranda</span>
-              <span class="font-mono text-xs text-neutral-400 block mt-0.5">Diseñador Industrial</span>
+          <!-- COLUMNA 3: Fotografía enmarcada idéntica a la imagen de referencia -->
+          <div class="pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-24 px-6 sm:px-10 flex items-center justify-center lg:justify-end">
+            <div class="w-full max-w-[310px]">
+              <img src="assets/reference_building_hd.jpg" alt="Edificio Clínica Óptica" class="photo-frame-exact shadow-none">
             </div>
           </div>
 
@@ -591,293 +140,24 @@
 
       </div>
     </section>
-
-    <!-- ==================== SECTION 7: LOCATION & BOUTIQUE STUDIO ==================== -->
-    <section id="ubicacion" class="py-24 border-b border-neutral-200/60 bg-[#FAFBFB]">
-      <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
-          <!-- Info Details -->
-          <div class="lg:col-span-5 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-3 mb-3">
-                <span class="w-6 h-[1.5px] bg-neutral-900"></span>
-                <span class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">VISÍTANOS</span>
-              </div>
-              <h2 class="font-display font-bold text-3xl sm:text-5xl text-neutral-900 tracking-tight mb-8">
-                El Atelier & Gabinete
-              </h2>
-
-              <div class="space-y-6 text-sm">
-                <div>
-                  <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-1">Dirección</span>
-                  <p class="font-display font-semibold text-lg text-neutral-900">Calle Jorge Juan 18, 1º Dcha</p>
-                  <p class="text-neutral-500">28001 Barrio de Salamanca, Madrid</p>
-                </div>
-
-                <div class="pt-4 border-t border-neutral-200">
-                  <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-1">Horarios de Consulta</span>
-                  <p class="text-neutral-900 font-medium">Lunes a Viernes: 10:00 – 20:30 h</p>
-                  <p class="text-neutral-900 font-medium">Sábados: 10:30 – 15:00 h (Con cita previa)</p>
-                  <p class="text-neutral-500 text-xs mt-1">Servicio de conserjería y parking privado disponible.</p>
-                </div>
-
-                <div class="pt-4 border-t border-neutral-200">
-                  <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-1">Contacto Directo</span>
-                  <p class="text-neutral-900 font-medium">+34 912 345 678</p>
-                  <p class="text-neutral-500">cita@apexoptique.com</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 pt-8 border-t border-neutral-200">
-              <button class="open-booking-modal-btn btn-apex w-full text-center" data-service="Examen Optométrico Wavefront 3D">
-                <span>CONCERTAR CITA PRIVADA</span>
-                <svg class="w-4 h-4 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- Stylized Architectural Studio Visual / Map -->
-          <div class="lg:col-span-7">
-            <div class="frame-container bg-white h-full flex flex-col justify-between">
-              <div class="relative overflow-hidden w-full h-[380px] bg-neutral-900 flex items-center justify-center">
-                <img src="assets/boutique-interior.jpg" alt="Interior Boutique APEX" class="w-full h-full object-cover opacity-85">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 text-white">
-                  <span class="font-mono text-xs text-neutral-300 block mb-1">ESPACIO FÍSICO</span>
-                  <h4 class="font-display font-bold text-2xl">Atelier Central Madrid</h4>
-                  <p class="text-neutral-300 text-xs mt-1">Diseñado con iluminación espectral balanceada a 5000K para fidelidad cromática real.</p>
-                </div>
-              </div>
-
-              <!-- Fast Contact Form snippet -->
-              <div class="p-6 bg-neutral-50 border-t border-neutral-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <span class="font-mono text-[11px] text-neutral-500 uppercase tracking-wider block mb-1">¿Tienes preguntas técnicas?</span>
-                  <p class="text-xs text-neutral-600">Nuestro optometrista jefe responde tus dudas sobre graduación o cirugía previa.</p>
-                </div>
-                <div class="flex items-center sm:justify-end">
-                  <a href="mailto:gabinete@apexoptique.com" class="btn-apex-outline py-2 px-4 text-[11px]">
-                    CONSULTA CLÍNICA POR EMAIL
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-neutral-950 text-white border-t border-neutral-900 pt-16 pb-12">
-    <div class="max-w-[1440px] mx-auto px-6 sm:px-12">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-neutral-800">
-        
-        <!-- Col 1: Brand & Identity -->
-        <div class="md:col-span-5">
-          <span class="font-display font-extrabold text-3xl tracking-tight block mb-3">APEX</span>
-          <span class="font-mono text-xs tracking-[0.25em] text-neutral-400 uppercase block mb-6">OPTIQUE · ATELIER & CLINIC</span>
-          <p class="text-neutral-400 text-sm max-w-sm leading-relaxed mb-6">
-            Pioneros en la convergencia entre diseño arquitectónico, optometría digital computarizada y monturas de titanio japonés.
-          </p>
-          <div class="font-mono text-xs text-neutral-500">
-            REGISTRO SANITARIO CS-48192/MD
-          </div>
-        </div>
+  <script>
+    // Control del menú móvil
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const drawer = document.getElementById('mobile-drawer');
+    const closeBtn = document.getElementById('close-drawer');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        <!-- Col 2: Navigation Links -->
-        <div class="md:col-span-3">
-          <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-4">GABINETE & ATELIER</span>
-          <ul class="space-y-2.5 text-sm text-neutral-300">
-            <li><a href="#servicios" class="hover:text-white transition-colors">Examen Wavefront 3D</a></li>
-            <li><a href="#coleccion" class="hover:text-white transition-colors">Monturas de Titanio Puro</a></li>
-            <li><a href="#coleccion" class="hover:text-white transition-colors">Lentes FreeForm Personalizadas</a></li>
-            <li><a href="#simulador" class="hover:text-white transition-colors">Simulador de Agudeza Visual</a></li>
-            <li><a href="#filosofia" class="hover:text-white transition-colors">Manifiesto de Precisión</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Newsletter & VIP Access -->
-        <div class="md:col-span-4">
-          <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-4">EDICIONES LIMITADAS</span>
-          <p class="text-neutral-400 text-xs leading-relaxed mb-4">
-            Recibe notificación previa antes del lanzamiento de tiradas numeradas de monturas y conferencias sobre salud visual.
-          </p>
-          <form onsubmit="event.preventDefault(); alert('Gracias por unirte a la lista de invitados de APEX.');" class="flex">
-            <input type="email" placeholder="correo@ejemplo.com" required class="bg-neutral-900 border border-neutral-800 text-xs px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-white flex-1">
-            <button type="submit" class="bg-white text-black font-semibold text-xs px-4 py-3 hover:bg-neutral-200 transition-colors uppercase tracking-wider">
-              Unirse
-            </button>
-          </form>
-        </div>
-
-      </div>
-
-      <!-- Bottom Bar -->
-      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 font-mono">
-        <div>
-          © 2024–2026 APEX OPTIQUE S.L. Todos los derechos reservados.
-        </div>
-        <div class="flex items-center space-x-6 mt-4 sm:mt-0">
-          <a href="#" class="hover:text-neutral-300 transition-colors">Aviso Legal</a>
-          <a href="#" class="hover:text-neutral-300 transition-colors">Privacidad Clínica</a>
-          <a href="#" class="hover:text-neutral-300 transition-colors">Términos de Garantía</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ==================== APPOINTMENT BOOKING MODAL ==================== -->
-  <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-white max-w-xl w-full p-8 sm:p-10 border border-neutral-200 shadow-2xl relative modal-content max-h-[90vh] overflow-y-auto">
-      
-      <!-- Close Button -->
-      <button id="close-booking-modal" class="absolute top-6 right-6 text-neutral-400 hover:text-black">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-
-      <!-- Form View -->
-      <form id="booking-form" class="space-y-6">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="w-4 h-[1.5px] bg-neutral-900"></span>
-            <span class="font-mono text-xs tracking-widest text-neutral-500 uppercase">RESERVA CLÍNICA</span>
-          </div>
-          <h3 class="font-display font-bold text-2xl text-neutral-900">Concertar Cita en el Atelier</h3>
-          <p class="text-xs text-neutral-500 mt-1">Atención individualizada sin esperas en gabinete privado.</p>
-        </div>
-
-        <div>
-          <label class="block font-mono text-xs text-neutral-700 uppercase tracking-wider mb-2">Servicio Requerido</label>
-          <select id="booking-service" class="w-full border border-neutral-300 bg-white p-3 text-sm focus:outline-none focus:border-neutral-900">
-            <option value="Examen Optométrico Wavefront 3D">Examen Optométrico Wavefront 3D (45 min · 60 €)</option>
-            <option value="Asesoramiento Morfológico de Monturas">Asesoramiento Morfológico de Monturas (30 min · Gratuito)</option>
-            <option value="Topografía Corneal">Topografía Corneal & Lentes de Contacto (40 min · 75 €)</option>
-            <option value="Retinografía Digital">Retinografía Digital No Midriática (30 min · 50 €)</option>
-            <option value="Control de Miopía Infantil & Orto-K">Control de Miopía Infantil & Orto-K (60 min · 90 €)</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-mono text-xs text-neutral-700 uppercase tracking-wider mb-2">Fecha Preferente</label>
-            <input type="date" id="booking-date" value="2026-11-23" class="w-full border border-neutral-300 p-3 text-sm focus:outline-none focus:border-neutral-900" required>
-          </div>
-          <div>
-            <label class="block font-mono text-xs text-neutral-700 uppercase tracking-wider mb-2">Horario Sugerido</label>
-            <input type="hidden" id="selected-time-input" value="11:00">
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" class="slot-time-btn py-2.5 text-xs font-mono border bg-neutral-900 text-white" data-time="11:00">11:00</button>
-              <button type="button" class="slot-time-btn py-2.5 text-xs font-mono border border-neutral-200 text-neutral-800 hover:border-black" data-time="13:30">13:30</button>
-              <button type="button" class="slot-time-btn py-2.5 text-xs font-mono border border-neutral-200 text-neutral-800 hover:border-black" data-time="17:00">17:00</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-mono text-xs text-neutral-700 uppercase tracking-wider mb-2">Nombre Completo</label>
-            <input type="text" id="booking-name" placeholder="Ej. Carlos M. Mendoza" required class="w-full border border-neutral-300 p-3 text-sm focus:outline-none focus:border-neutral-900">
-          </div>
-          <div>
-            <label class="block font-mono text-xs text-neutral-700 uppercase tracking-wider mb-2">Teléfono Móvil</label>
-            <input type="tel" id="booking-phone" placeholder="+34 600 000 000" required class="w-full border border-neutral-300 p-3 text-sm focus:outline-none focus:border-neutral-900">
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-mono text-xs text-neutral-700 uppercase tracking-wider mb-2">Correo Electrónico</label>
-          <input type="email" id="booking-email" placeholder="carlos@ejemplo.com" required class="w-full border border-neutral-300 p-3 text-sm focus:outline-none focus:border-neutral-900">
-        </div>
-
-        <button type="submit" class="btn-apex w-full py-4 text-center justify-center">
-          <span>CONFIRMAR SOLICITUD DE CITA</span>
-          <svg class="w-4 h-4 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </button>
-      </form>
-
-      <!-- Confirmation View -->
-      <div id="booking-confirmation" class="hidden text-center py-6">
-        <div class="w-16 h-16 bg-neutral-900 text-white rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-        </div>
-        <span class="font-mono text-xs tracking-widest text-neutral-400 uppercase block mb-1">SOLICITUD REGISTRADA</span>
-        <h3 class="font-display font-bold text-3xl text-neutral-900 mb-2">¡Cita Pre-Confirmada!</h3>
-        <p class="text-neutral-600 text-sm max-w-sm mx-auto mb-6">
-          Estimado/a <span id="confirm-client-name" class="font-bold text-neutral-900"></span>, hemos reservado tu espacio para <span id="confirm-service-name" class="font-bold text-neutral-900"></span> el <span id="confirm-datetime" class="font-bold text-neutral-900"></span>.
-        </p>
-        <div class="p-4 bg-neutral-50 border border-neutral-200 text-xs font-mono text-neutral-600 max-w-sm mx-auto mb-6">
-          Código de Reserva: <strong class="text-black">APX-98214</strong><br>
-          Atelier Central: Jorge Juan 18, Madrid.
-        </div>
-        <button id="confirm-close-btn" class="btn-apex w-full">
-          CERRAR VENTANA
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ==================== FRAME DETAILS MODAL ==================== -->
-  <div id="frame-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="bg-white max-w-3xl w-full p-8 sm:p-10 border border-neutral-200 shadow-2xl relative modal-content max-h-[90vh] overflow-y-auto">
-      
-      <button id="close-frame-modal" class="absolute top-6 right-6 text-neutral-400 hover:text-black">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div class="bg-neutral-50 p-6 flex items-center justify-center border border-neutral-100">
-          <img id="modal-frame-img" src="" alt="Ficha técnica de montura" class="w-full aspect-[4/3] object-cover mix-blend-multiply">
-        </div>
-
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span id="modal-frame-code" class="font-mono text-xs text-neutral-400 tracking-wider"></span>
-            <span id="modal-frame-price" class="font-display font-bold text-xl text-neutral-900"></span>
-          </div>
-
-          <h3 id="modal-frame-name" class="font-display font-extrabold text-3xl text-neutral-900 mb-4"></h3>
-          <p id="modal-frame-desc" class="text-sm text-neutral-600 leading-relaxed mb-6"></p>
-
-          <div class="space-y-3 font-mono text-xs border-t border-neutral-100 pt-4 mb-6">
-            <div class="flex justify-between py-1 border-b border-neutral-50">
-              <span class="text-neutral-400">MATERIAL:</span>
-              <span id="modal-frame-material" class="text-neutral-900 font-medium"></span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-neutral-50">
-              <span class="text-neutral-400">CALIBRE & PUENTE:</span>
-              <span id="modal-frame-dimensions" class="text-neutral-900 font-medium"></span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-neutral-50">
-              <span class="text-neutral-400">PESO ESTRUCTURAL:</span>
-              <span id="modal-frame-weight" class="text-neutral-900 font-medium"></span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-neutral-50">
-              <span class="text-neutral-400">MECANISMO BISAGRA:</span>
-              <span id="modal-frame-hinge" class="text-neutral-900 font-medium"></span>
-            </div>
-            <div class="flex justify-between py-1 border-b border-neutral-50">
-              <span class="text-neutral-400">ORIGEN ARTESANAL:</span>
-              <span id="modal-frame-origin" class="text-neutral-900 font-medium"></span>
-            </div>
-          </div>
-
-          <button id="modal-book-tryon" class="btn-apex w-full justify-center">
-            <span>RESERVAR PRUEBA EN EL ATELIER</span>
-            <svg class="w-4 h-4 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Application Logic -->
-  <script src="app.js"></script>
+    if (mobileBtn && drawer) {
+      mobileBtn.addEventListener('click', () => drawer.classList.remove('translate-x-full'));
+    }
+    if (closeBtn && drawer) {
+      closeBtn.addEventListener('click', () => drawer.classList.add('translate-x-full'));
+    }
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => drawer.classList.add('translate-x-full'));
+    });
+  </script>
 </body>
 </html>
